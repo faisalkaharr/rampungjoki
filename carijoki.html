@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cari Joki - RampungJoki</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         /* === Gaya Umum === */
         *, *::before, *::after {
@@ -15,34 +19,45 @@
             padding: 0;
         }
 
+        :root {
+            --primary-color: #007bff; /* Biru utama */
+            --secondary-color: #6c757d; /* Abu-abu sekunder */
+            --accent-color: #28a745; /* Hijau aksen */
+            --light-bg: #f8f9fa; /* Background terang */
+            --dark-text: #343a40; /* Teks gelap */
+            --light-text: #ffffff; /* Teks terang */
+            --border-color: #dee2e6; /* Warna border */
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', sans-serif;
             line-height: 1.6;
-            background-color: #f4f4f4; /* Warna background yang lebih lembut */
-            color: #333;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
             margin: 0;
-            padding-bottom: 50px; /* Ruang untuk footer */
+            padding-bottom: 70px; /* Ruang untuk footer */
             min-height: 100vh;
             position: relative; /* Untuk memposisikan footer */
         }
 
         .container {
             max-width: 1200px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
+            margin: 30px auto;
+            padding: 30px;
+            background-color: var(--light-text);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
             padding-top: 80px; /* Ruang untuk navbar sticky */
         }
 
         h1 {
-            color: #007bff; /* Biru RampungJoki */
+            color: var(--primary-color);
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
         }
 
-        /* Navbar */
+        /* Navbar (Dikembalikan ke sebelumnya) */
         .navbar {
             background-color: #375a7f; /* Biru tua profesional */
             color: white;
@@ -122,45 +137,48 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
-            margin-bottom: 30px;
-            padding: 15px;
+            margin-bottom: 40px;
+            padding: 25px;
             background-color: #e9ecef; /* Warna background filter */
-            border-radius: 5px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
         }
 
         .filter-group label {
             display: block;
-            margin-bottom: 5px;
-            color: #555;
-            font-weight: bold;
+            margin-bottom: 8px;
+            color: var(--secondary-color);
+            font-weight: 500;
         }
 
-        .filter-group select,
-        .filter-group input[type="text"] {
+        .filter-group select {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
             box-sizing: border-box;
         }
 
         .search-button {
             display: block;
-            width: 200px;
-            padding: 12px 20px;
-            background-color: #007bff; /* Biru RampungJoki */
-            color: white;
+            width: 220px;
+            padding: 14px 24px;
+            background-color: var(--primary-color);
+            color: var(--light-text);
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 1rem;
-            margin: 20px auto;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-weight: 500;
+            margin: 30px auto;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .search-button:hover {
             background-color: #0056b3;
             transform: translateY(-2px);
+            box-shadow: 0 3px 7px rgba(0, 0, 0, 0.15);
         }
 
         .joki-list {
@@ -168,28 +186,36 @@
         }
 
         .joki-card {
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
+            background-color: var(--light-text);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
             display: flex;
             align-items: center;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        .joki-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
         }
 
         .joki-avatar {
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             object-fit: cover;
-            margin-right: 20px;
-            background-color: #ccc; /* Placeholder abu-abu */
+            margin-right: 25px;
+            background-color: var(--secondary-color);
+            color: var(--light-text);
+            font-size: 2.5rem;
+            font-weight: 600;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 2rem;
-            color: #fff;
+            border: 3px solid var(--light-bg);
         }
 
         .joki-info {
@@ -197,56 +223,69 @@
         }
 
         .joki-info h3 {
-            color: #007bff; /* Biru RampungJoki */
+            color: var(--primary-color);
             margin-top: 0;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
         }
 
         .joki-info p {
-            color: #555;
-            margin-bottom: 5px; /* Kurangi margin bawah */
+            color: var(--secondary-color);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .joki-info p b {
+            font-weight: 600;
+            color: var(--dark-text);
         }
 
         .joki-contact {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
+            min-width: 150px;
         }
 
         .contact-button {
             display: inline-block;
-            padding: 10px 15px;
-            color: white;
+            padding: 12px 20px;
+            color: var(--light-text);
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 8px;
             text-align: center;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
             cursor: pointer;
+            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .lihat-profil {
-            background-color: #007bff;
+            background-color: var(--primary-color);
         }
 
         .lihat-profil:hover {
             background-color: #0056b3;
             transform: translateY(-2px);
+            box-shadow: 0 3px 7px rgba(0, 0, 0, 0.15);
         }
 
         .hubungi-wa {
-            background-color: #25d366; /* Warna WhatsApp */
+            background-color: var(--accent-color);
         }
 
         .hubungi-wa:hover {
-            background-color: #128c7e;
+            background-color: #1e7e34;
             transform: translateY(-2px);
+            box-shadow: 0 3px 7px rgba(0, 0, 0, 0.15);
         }
 
         .no-results {
             text-align: center;
             color: #dc3545;
-            font-size: 1.1rem;
-            margin-top: 30px;
+            font-size: 1.2rem;
+            margin-top: 40px;
         }
 
         /* Modal Popup */
@@ -263,12 +302,12 @@
         }
 
         .modal-content {
-            background-color: #fff;
-            margin: 10% auto; /* Turunkan sedikit dari atas */
-            padding: 30px; /* Padding lebih besar */
-            border: 1px solid #888;
+            background-color: var(--light-text);
+            margin: 5% auto; /* Turunkan sedikit dari atas */
+            padding: 40px; /* Padding lebih besar */
+            border: 1px solid var(--border-color);
             width: 80%; /* Tetap lebar 80% */
-            max-width: 600px; /* Lebar maksimum modal */
+            max-width: 700px; /* Lebar maksimum modal */
             border-radius: 12px; /* Sudut lebih bulat */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Efek bayangan */
             position: relative;
@@ -281,11 +320,11 @@
         }
 
         .close-button {
-            color: #aaa;
+            color: var(--secondary-color);
             position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 30px;
+            top: 20px;
+            right: 25px;
+            font-size: 2.5rem;
             font-weight: bold;
             cursor: pointer;
             transition: color 0.2s ease;
@@ -293,28 +332,47 @@
 
         .close-button:hover,
         .close-button:focus {
-            color: black;
+            color: var(--dark-text);
             text-decoration: none;
             cursor: pointer;
         }
 
         .modal-content h2 {
-            color: #007bff; /* Biru RampungJoki */
+            color: var(--primary-color);
             margin-top: 0;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #eee; /* Garis bawah judul */
-            padding-bottom: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--border-color); /* Garis bawah judul */
+            padding-bottom: 15px;
         }
 
         .modal-content h3 {
-            color: #555;
-            margin-top: 15px;
-            margin-bottom: 8px;
+            color: var(--secondary-color);
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: 600;
         }
 
         .modal-content p {
             margin-bottom: 15px;
             line-height: 1.7;
+            color: var(--dark-text);
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--light-bg);
+            padding: 20px 0;
+            text-align: center;
+            font-size: 0.9em;
+            color: var(--secondary-color);
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            border-top: 1px solid var(--border-color);
         }
 
         /* Responsive Layout */
@@ -333,6 +391,10 @@
             .nav-item {
                 margin-left: 0;
                 margin-bottom: 10px;
+            }
+
+            .search-filters {
+                grid-template-columns: 1fr;
             }
 
             .joki-card {
@@ -378,22 +440,8 @@
                     <option value="Tugas">Joki Tugas</option>
                     <option value="Game">Joki Game</option>
                     <option value="Performa">Joki Performa</option>
-                    <option value="Penulisan">Joki Penulisan</option>
-                    <option value="Pemrograman">Joki Pemrograman</option>
+                    <option value="Penulisan">Joki Penulisan<option value="Pemrograman">Joki Pemrograman</option>
                     <option value="Lainnya">Lainnya</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <label for="skill">Keahlian Spesifik:</label>
-                <input type="text" id="skill" placeholder="Masukkan keahlian (misal: Matematika, Mobile Legends)">
-            </div>
-            <div class="filter-group">
-                <label for="harga">Rentang Harga:</label>
-                <select id="harga">
-                    <option value="">Semua Harga</option>
-                    <option value="murah">Di bawah Rp 50.000</option>
-                    <option value="sedang">Rp 50.000 - Rp 150.000</option>
-                    <option value="mahal">Di atas Rp 150.000</option>
                 </select>
             </div>
             <div class="filter-group">
@@ -407,7 +455,7 @@
             </div>
         </div>
 
-        <button class="search-button">Cari Joki</button>
+        <button class="search-button">Cari Joki <i class="fas fa-search" style="color: white;"></i></button>
 
         <div class="joki-list">
             <h2>Hasil Pencarian Joki</h2>
@@ -418,19 +466,15 @@
         <div class="modal-content">
             <span class="close-button">&times;</span>
             <h2 id="modal-nama">Nama Joki</h2>
-            <h3>💼 Layanan</h3>
-            <p id="modal-layanan-isi">Informasi layanan joki.</p>
-            <h3>⭐ Keahlian</h3>
-            <p id="modal-keahlian-isi"></p>
-            <h3>💰 Harga</h3>
-            <p id="modal-harga-isi">Informasi tarif joki.</p>
-            <h3>📜 Pengalaman</h3>
-            <p id="modal-pengalaman-isi">Informasi pengalaman joki.</p>
+            <h3><i class="fas fa-info-circle" style="color: var(--primary-color);"></i> Detail Lengkap</h3>
+            <div class="detail-card">
+                <p id="modal-layanan-isi"></p>
+            </div>
         </div>
     </div>
 
     <footer>
-        <div style="text-align: center; padding: 10px; background-color: #f0f0f0; font-size: 0.8em; margin-top: 50px; position: absolute; bottom: 0; width: 100%;">
+        <div style="text-align: center; padding: 20px; font-size: 0.9em; color: var(--secondary-color);">
             &copy; 2025 RampungJoki. All rights reserved.
         </div>
     </footer>
@@ -439,29 +483,29 @@
         const dataJoki = [
             {
                 id: 1,
-                nama: "Joki Pro Gamer",
+                nama: "SEBATSZ",
                 layanan: ["Game"],
-                skill: ["Mobile Legends: Mythic", "PUBG Mobile: Conqueror"],
-                harga: "Rp 100.000/match",
+                skill: ["Mobile Legends"],
+                harga: "Rp 10.000 - Rp 50.000 tergantung tier",
                 pengalaman: "Ahli",
-                avatar: null, // Akan menggunakan joki.jpg
-                wa: "6281234567890",
-                detail_layanan: "Membantu push rank dan meningkatkan statistik game.",
-                profil: "#" // Placeholder
+                avatar: "sebatsz.jpeg",
+                wa: "6281292398570",
+                detail_layanan: "🎮 Pernah mengalahkan squad SIWA & ACURSIO di ranked mythic. Siap membantu push rank dengan cepat dan efisien.",
+                profil: "#"
             },
             {
                 id: 2,
-                nama: "Tutor Tugas Kilat",
-                layanan: ["Tugas"],
-                skill: ["Matematika SMA", "Fisika SMA", "Kimia SMA"],
-                harga: "Rp 30.000/tugas",
+                nama: "Matadore store ",
+                layanan: ["Game"],
+                skill: ["Mobile Legends"],
+                harga: "Epic 1 Star Rp 5.000",
                 pengalaman: "Menengah",
-                avatar: "joki_tugas.jpg", // Contoh jika ada gambar spesifik
-                wa: "6289876543210",
-                detail_layanan: "Membantu mengerjakan tugas sekolah dengan cepat dan akurat.",
-                profil: "#" // Placeholder
+                avatar: "a.jpg",
+                wa: "6285716046032",
+                detail_layanan: "✨ Joki di sini membuat hati kalian senang dengan kemenangan beruntun. Harga bersahabat, kualitas hebat!",
+                profil: "#"
             },
-			{
+            {
                 id: 3,
                 nama: "Trims.Project",
                 layanan: ["Tugas"],
@@ -470,34 +514,34 @@
                 pengalaman: "Ahli",
                 avatar: "trims.jpeg",
                 wa: "6285775085507",
-                detail_layanan: `📚 Open jasa penulisan karya ilmiah
-📚, Pengolahan data statistik 🧮
-
-Pengolahan Data
-📌 Pengolahan data statistik
-1. Software SPSS
-2. Software  Smart Pls
-📌 Data Entry (Data Sekunder)
-
-Skripsi
-📌 Daftar Isi Otomatis
-📌 Daftar Gambar Otomatis
-📌 Daftar Tabel Otomatis
-📌 Daftar Lampiran Otomatis
-📌 Page Halaman
-📌 Bab 1
-📌 Bab 2
-📌 Bab 3
-📌 Bab 4
-📌 Bab 5
-📌 Full Skripsi (5 mahasiswa)
-
-📝Include Revisi
-
-Start from 25k
-
-Cepat dan Terpercaya`,
-                profil: "#" // Placeholder
+                detail_layanan: `<div class="detail-info">
+                    <h3>📚 Layanan Penulisan Karya Ilmiah & Pengolahan Data Statistik</h3>
+                    <ul>
+                        <li>📊 Pengolahan Data Statistik (SPSS, SmartPLS)</li>
+                        <li>📝 Data Entry (Data Sekunder)</li>
+                        <li>🎓 Bantuan Skripsi (Bab 1-5, Full Skripsi, Revisi)</li>
+                        <li>📄 Daftar Isi, Gambar, Tabel, Lampiran Otomatis</li>
+                        <li>✨ Cepat, Terpercaya, dan Profesional. Harga mulai dari Rp 25.000 (fleksibel).</li>
+                    </ul>
+                </div>`,
+                profil: "#"
+            },
+             {
+                id: 4,
+                nama: "Tutor Tugas Kilat",
+                layanan: ["Tugas"],
+                skill: ["Matematika SMA", "Fisika SMA", "Kimia SMA"],
+                harga: "Rp 30.000/tugas",
+                pengalaman: "Menengah",
+                avatar: "joki_tugas.jpg",
+                wa: "6289876543210",
+                detail_layanan: `<div class="detail-info">
+                    <h3>📝 Bantuan Tugas Sekolah Kilat</h3>
+                    <p>💡 Mengerjakan tugas Matematika, Fisika, dan Kimia SMA dengan cepat dan akurat.</p>
+                    <p>⏱️ Deadline mepet? Jangan khawatir, kami siap membantu!</p>
+                    <p>💰 Harga terjangkau, hanya Rp 30.000 per tugas.</p>
+                </div>`,
+                profil: "#"
             },
             // Tambahkan data joki lainnya di sini
         ];
@@ -509,11 +553,15 @@ Cepat dan Terpercaya`,
             const closeModalButton = document.querySelector(".close-button");
             const modalNama = document.getElementById("modal-nama");
             const modalLayananIsi = document.getElementById("modal-layanan-isi");
-            const modalKeahlianIsi = document.getElementById("modal-keahlian-isi");
-            const modalHargaIsi = document.getElementById("modal-harga-isi");
-            const modalPengalamanIsi = document.getElementById("modal-pengalaman-isi");
+
+            console.log("jokiListContainer:", jokiListContainer); // Debugging
 
             function tampilkanHasil(joki) {
+                console.log("Fungsi tampilkanHasil dipanggil dengan:", joki); // Debugging
+                if (!jokiListContainer) {
+                    console.error("Elemen .joki-list tidak ditemukan!");
+                    return;
+                }
                 jokiListContainer.innerHTML = '<h2>Hasil Pencarian Joki</h2>';
                 if (joki.length === 0) {
                     jokiListContainer.innerHTML += '<p class="no-results">Tidak ada joki yang ditemukan sesuai kriteria Anda.</p>';
@@ -521,21 +569,21 @@ Cepat dan Terpercaya`,
                 }
 
                 joki.forEach(j => {
-                    const card = document.createElement('div');
+                    const card = document.createElement('article');
                     card.classList.add('joki-card');
-                    const avatarContent = j.avatar ? `<img src="${j.avatar}" alt="Avatar ${j.nama}" class="joki-avatar">` : `<img src="joki.jpg" alt="Avatar ${j.nama}" class="joki-avatar">`;
+                    const avatarContent = j.avatar ? `<img src="${j.avatar}" alt="Avatar ${j.nama}" class="joki-avatar">` : `<div class="joki-avatar">${j.nama.charAt(0).toUpperCase()}</div>`;
                     card.innerHTML = `
                         ${avatarContent}
                         <div class="joki-info">
                             <h3>${j.nama}</h3>
-                            <p>🛠️ <b>Layanan:</b> ${j.layanan.join(', ')}</p>
-                            <p>✨ <b>Keahlian:</b> ${j.skill.join(', ')}</p>
-                            <p>💰 <b>Harga:</b> ${j.harga}</p>
-                            <p>🏆 <b>Pengalaman:</b> ${j.pengalaman}</p>
+                            <p><i class="fas fa-briefcase" style="color: var(--primary-color);"></i> <b>Layanan:</b> ${j.layanan.join(', ')}</p>
+                            <p><i class="fas fa-star" style="color: gold;"></i> <b>Keahlian:</b> ${j.skill.join(', ')}</p>
+                            <p><i class="fas fa-dollar-sign" style="color: green;"></i> <b>Harga:</b> ${j.harga}</p>
+                            <p><i class="fas fa-trophy" style="color: #c9b037;"></i> <b>Pengalaman:</b> ${j.pengalaman}</p>
                         </div>
                         <div class="joki-contact">
-                            <button class="contact-button lihat-profil" data-joki-id="${j.id}">Lihat Profil <i class="fas fa-eye"></i></button>
-                            <a href="https://wa.me/${j.wa}" target="_blank" class="contact-button hubungi-wa">Hubungi WA <i class="fab fa-whatsapp"></i></a>
+                            <button class="contact-button lihat-profil" data-joki-id="${j.id}"><i class="fas fa-info-circle"></i> Detail Lengkap</button>
+                            <a href="https://wa.me/${j.wa}" target="_blank" class="contact-button hubungi-wa"><i class="fab fa-whatsapp"></i> Hubungi WA</a>
                         </div>
                     `;
                     jokiListContainer.appendChild(card);
@@ -549,10 +597,7 @@ Cepat dan Terpercaya`,
                         const selectedJoki = dataJoki.find(j => j.id === jokiId);
                         if (selectedJoki) {
                             modalNama.textContent = selectedJoki.nama;
-                            modalLayananIsi.textContent = selectedJoki.detail_layanan ? selectedJoki.detail_layanan : selectedJoki.layanan.join(', ');
-                            modalKeahlianIsi.textContent = selectedJoki.skill ? selectedJoki.skill.join(', ') : "-";
-                            modalHargaIsi.textContent = selectedJoki.harga ? selectedJoki.harga : "-";
-                            modalPengalamanIsi.textContent = selectedJoki.pengalaman ? selectedJoki.pengalaman : "-";
+                            modalLayananIsi.innerHTML = `<div class="detail-card">${selectedJoki.detail_layanan}</div>`;
                             modal.style.display = "block";
                         }
                     });
@@ -562,27 +607,20 @@ Cepat dan Terpercaya`,
             if (searchButton) {
                 searchButton.addEventListener('click', function() {
                     const layanan = document.getElementById('layanan').value;
-                    const skill = document.getElementById('skill').value.toLowerCase();
-                    const harga = document.getElementById('harga').value;
                     const pengalaman = document.getElementById('pengalaman').value;
 
                     const hasilCari = dataJoki.filter(joki => {
                         const cocokLayanan = !layanan || joki.layanan.includes(layanan);
-                        const cocokSkill = !skill || joki.skill.some(s => s.toLowerCase().includes(skill));
-                        const cocokHarga = !harga ||
-                                            (harga === 'murah' && joki.harga.toLowerCase().includes('dibawah rp 50.000')) ||
-                                            (harga === 'sedang' && joki.harga.toLowerCase().includes('rp 50.000') && joki.harga.toLowerCase().includes('rp 150.000')) ||
-                                            (harga === 'mahal' && joki.harga.toLowerCase().includes('di atas rp 150.000'));
                         const cocokPengalaman = !pengalaman || joki.pengalaman.toLowerCase() === pengalaman.toLowerCase();
 
-                        return cocokLayanan && cocokSkill && cocokHarga && cocokPengalaman;
+                        return cocokLayanan && cocokPengalaman;
                     });
 
                     tampilkanHasil(hasilCari);
                 });
             }
 
-            // Tampilkan semua joki saat halaman pertama kali dimuat (opsional)
+            // Tampilkan semua joki saat halaman pertama kali dimuat
             tampilkanHasil(dataJoki);
 
             // Tutup modal ketika tombol close diklik
@@ -598,6 +636,5 @@ Cepat dan Terpercaya`,
             });
         });
     </script>
-    <script src="https://kit.fontawesome.com/your_fontawesome_kit.js" crossorigin="anonymous"></script>
 </body>
 </html>
