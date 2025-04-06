@@ -57,7 +57,7 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
         }
 
-        /* Navbar (Dikembalikan ke sebelumnya) */
+        /* Navbar */
         .navbar {
             background-color: #375a7f; /* Biru tua profesional */
             color: white;
@@ -225,12 +225,20 @@
         .joki-info h3 {
             color: var(--primary-color);
             margin-top: 0;
-            margin-bottom: 10px;
+            margin-bottom: 5px; /* Reduced margin */
+        }
+
+        .rating {
+            margin-bottom: 5px;
+        }
+
+        .rating .fas.fa-star {
+            margin-right: 2px;
         }
 
         .joki-info p {
             color: var(--secondary-color);
-            margin-bottom: 8px;
+            margin-bottom: 5px; /* Reduced margin */
             display: flex;
             align-items: center;
             gap: 8px;
@@ -340,9 +348,18 @@
         .modal-content h2 {
             color: var(--primary-color);
             margin-top: 0;
-            margin-bottom: 30px;
+            margin-bottom: 10px; /* Reduced margin */
             border-bottom: 2px solid var(--border-color); /* Garis bawah judul */
-            padding-bottom: 15px;
+            padding-bottom: 10px; /* Reduced padding */
+        }
+
+        .modal-rating {
+            margin-bottom: 10px;
+        }
+
+        .modal-rating .fas.fa-star {
+            color: gold;
+            margin-right: 2px;
         }
 
         .modal-content h3 {
@@ -352,7 +369,7 @@
             font-weight: 600;
         }
 
-        .modal-content p {
+        .modal-content .detail-card p {
             margin-bottom: 15px;
             line-height: 1.7;
             color: var(--dark-text);
@@ -360,6 +377,70 @@
             border: 1px solid var(--border-color);
             border-radius: 8px;
             background-color: #f9f9f9;
+        }
+
+        .modal-content #modal-pesan-sekarang {
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .testimonials-modal {
+            margin-top: 30px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+
+        .testimonials-modal h3 {
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .testimonial-carousel-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-carousel {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .testimonial-image {
+            min-width: 100%; /* Setiap gambar memenuhi lebar container */
+            height: auto;
+            display: block;
+            border-radius: 8px;
+        }
+
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: var(--light-text);
+            border: none;
+            padding: 10px;
+            margin: 0 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .carousel-button:hover {
+            opacity: 1;
+        }
+
+        .carousel-button.prev {
+            left: 10px;
+        }
+
+        .carousel-button.next {
+            right: 10px;
         }
 
         /* Footer */
@@ -413,6 +494,14 @@
                 gap: 10px;
             }
         }
+
+        @media (max-width: 600px) {
+            .carousel-button {
+                padding: 8px;
+                margin: 0 5px;
+                font-size: 0.8em;
+            }
+        }
     </style>
 </head>
 <body>
@@ -438,7 +527,7 @@
                 <select id="layanan">
                     <option value="">Semua Layanan</option>
                     <option value="Tugas">Joki Tugas</option>
-                    <option value="Game">Joki Game</option>                  
+                    <option value="Game">Joki Game</option
                     <option value="Penulisan">Joki Penulisan</option>
                 </select>
             </div>
@@ -464,9 +553,27 @@
         <div class="modal-content">
             <span class="close-button">&times;</span>
             <h2 id="modal-nama">Nama Joki</h2>
+            <div class="modal-rating">
+                </div>
             <h3><i class="fas fa-info-circle" style="color: var(--primary-color);"></i> Detail Lengkap</h3>
             <div class="detail-card">
                 <p id="modal-layanan-isi"></p>
+            </div>
+            <a id="modal-pesan-sekarang" href="#" target="_blank" class="contact-button hubungi-wa"><i class="fab fa-whatsapp"></i> Pesan Sekarang</a>
+
+            <div class="testimonials-modal">
+                <h3><i class="fas fa-comments" style="color: var(--accent-color);"></i> Testimoni</h3>
+                <div class="testimonial-carousel-container">
+                    <div class="testimonial-carousel">
+                        <img src="placeholder_testimoni1.jpg" alt="Testimoni 1" class="testimonial-image">
+                        <img src="placeholder_testimoni2.jpg" alt="Testimoni 2" class="testimonial-image">
+                        <img src="placeholder_testimoni3.jpg" alt="Testimoni 3" class="testimonial-image">
+                        <img src="placeholder_testimoni4.jpg" alt="Testimoni 4" class="testimonial-image">
+                        <img src="placeholder_testimoni5.jpg" alt="Testimoni 5" class="testimonial-image">
+                    </div>
+                    <button class="carousel-button prev"><i class="fas fa-chevron-left"></i></button>
+                    <button class="carousel-button next"><i class="fas fa-chevron-right"></i></button>
+                </div>
             </div>
         </div>
     </div>
@@ -478,18 +585,16 @@
     </footer>
 
     <script>
-        const dataJoki = [
-            {
-                id: 1,
-                nama: "SEBATSZ",
-                layanan: ["Game"],
+        const dataJoki = [            {                id: 1,                nama: "SEBATSZ",                layanan: ["Game"],
                 skill: ["Mobile Legends"],
                 harga: "Rp 10.000 - Rp 50.000 tergantung tier",
                 pengalaman: "Ahli",
                 avatar: "sebatsz.jpeg",
                 wa: "6281292398570",
                 detail_layanan: "🎮 Pernah mengalahkan squad SIWA & ACURSIO di ranked mythic. Siap membantu push rank dengan cepat dan efisien.",
-                profil: "#"
+                profil: "#",
+                rating: 5,
+                testimonials: ["placeholder_testimoni1.jpg", "placeholder_testimoni2.jpg"]
             },
             {
                 id: 2,
@@ -501,14 +606,16 @@
                 avatar: "matadore.jfif",
                 wa: "6285716046032",
                 detail_layanan: "✨ Joki di sini membuat hati kalian senang dengan kemenangan beruntun. Harga bersahabat, kualitas hebat!",
-                profil: "#"
+                profil: "#",
+                rating: 5,
+                testimonials: ["placeholder_testimoni2.jpg", "placeholder_testimoni3.jpg", "placeholder_testimoni4.jpg"]
             },
             {
                 id: 3,
                 nama: "Trims.Project",
                 layanan: ["Tugas"],
                 skill: ["Skripsi", "Tugas", "Pengolahan Data"],
-                harga: "Start Form Rp 25.000",
+                harga: "Start Form Rp 25000",
                 pengalaman: "Ahli",
                 avatar: "trims.jpeg",
                 wa: "6285775085507",
@@ -522,9 +629,11 @@
                         <li>✨ Cepat, Terpercaya, dan Profesional. Harga mulai dari Rp 25.000 (fleksibel).</li>
                     </ul>
                 </div>`,
-                profil: "#"
+                profil: "#",
+                rating: 5,
+                testimonials: ["placeholder_testimoni3.jpg", "placeholder_testimoni4.jpg", "placeholder_testimoni5.jpg", "placeholder_testimoni1.jpg"]
             },
-             {
+            {
                 id: 4,
                 nama: "Tutor Tugas Kilat",
                 layanan: ["Tugas"],
@@ -539,9 +648,11 @@
                     <p>⏱️ Deadline mepet? Jangan khawatir, kami siap membantu!</p>
                     <p>💰 Harga terjangkau, hanya Rp 30.000 per tugas.</p>
                 </div>`,
-                profil: "#"
+                profil: "#",
+                rating: 5,
+                testimonials: ["placeholder_testimoni4.jpg", "placeholder_testimoni5.jpg", "placeholder_testimoni1.jpg", "placeholder_testimoni2.jpg", "placeholder_testimoni3.jpg"]
             },
-            // Tambahkan data joki lainnya di sini
+            // Tambahkan data joki lainnya dengan properti 'testimonials' (array foto)
         ];
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -551,11 +662,17 @@
             const closeModalButton = document.querySelector(".close-button");
             const modalNama = document.getElementById("modal-nama");
             const modalLayananIsi = document.getElementById("modal-layanan-isi");
+            const modalPesanSekarang = document.getElementById("modal-pesan-sekarang");
 
-            console.log("jokiListContainer:", jokiListContainer); // Debugging
+            function renderRating(rating) {
+                let stars = '';
+                for (let i = 0; i < rating; i++) {
+                    stars += '<span class="fas fa-star" style="color: gold;"></span>';
+                }
+                return stars;
+            }
 
             function tampilkanHasil(joki) {
-                console.log("Fungsi tampilkanHasil dipanggil dengan:", joki); // Debugging
                 if (!jokiListContainer) {
                     console.error("Elemen .joki-list tidak ditemukan!");
                     return;
@@ -574,6 +691,9 @@
                         ${avatarContent}
                         <div class="joki-info">
                             <h3>${j.nama}</h3>
+                            <div class="rating">
+                                ${renderRating(j.rating)}
+                            </div>
                             <p><i class="fas fa-briefcase" style="color: var(--primary-color);"></i> <b>Layanan:</b> ${j.layanan.join(', ')}</p>
                             <p><i class="fas fa-star" style="color: gold;"></i> <b>Keahlian:</b> ${j.skill.join(', ')}</p>
                             <p><i class="fas fa-dollar-sign" style="color: green;"></i> <b>Harga:</b> ${j.harga}</p>
@@ -587,7 +707,6 @@
                     jokiListContainer.appendChild(card);
                 });
 
-                // Tambahkan event listener untuk tombol "Lihat Profil" setelah kartu joki dibuat
                 const lihatProfilButtons = document.querySelectorAll('.lihat-profil');
                 lihatProfilButtons.forEach(button => {
                     button.addEventListener('click', function() {
@@ -595,8 +714,60 @@
                         const selectedJoki = dataJoki.find(j => j.id === jokiId);
                         if (selectedJoki) {
                             modalNama.textContent = selectedJoki.nama;
+                            const modalRatingContainer = modal.querySelector('.modal-rating');
+                            modalRatingContainer.innerHTML = renderRating(selectedJoki.rating);
                             modalLayananIsi.innerHTML = `<div class="detail-card">${selectedJoki.detail_layanan}</div>`;
+                            modalPesanSekarang.href = `https://wa.me/${selectedJoki.wa}`;
                             modal.style.display = "block";
+
+                            // Render Testimoni Carousel
+                            const testimonialCarouselContainer = modal.querySelector('.testimonial-carousel');
+                            const prevButton = modal.querySelector('.carousel-button.prev');
+                            const nextButton = modal.querySelector('.carousel-button.next');
+                            testimonialCarouselContainer.innerHTML = ''; // Bersihkan carousel sebelumnya
+
+                            if (selectedJoki.testimonials && selectedJoki.testimonials.length > 0) {
+                                selectedJoki.testimonials.forEach(imgSrc => {
+                                    const img = document.createElement('img');
+                                    img.src = imgSrc;
+                                    img.alt = "Testimoni";
+                                    img.classList.add('testimonial-image');
+                                    testimonialCarouselContainer.appendChild(img);
+                                });
+
+                                let counter = 0;
+                                const slides = testimonialCarouselContainer.querySelectorAll('.testimonial-image');
+                                const slideWidth = slides[0].offsetWidth;
+
+                                function scrollToSlide(index) {
+                                    testimonialCarouselContainer.style.transform = `translateX(-${index * slideWidth}px)`;
+                                }
+
+                                nextButton.addEventListener('click', () => {
+                                    counter++;
+                                    if (counter >= slides.length) {
+                                        counter = 0;
+                                    }
+                                    scrollToSlide(counter);
+                                });
+
+                                prevButton.addEventListener('click', () => {
+                                    counter--;
+                                    if (counter < 0) {
+                                        counter = slides.length - 1;
+                                    }
+                                    scrollToSlide(counter);
+                                });
+
+                                // Atur posisi awal
+                                scrollToSlide(0);
+                                prevButton.style.display = slides.length > 1 ? 'block' : 'none';
+                                nextButton.style.display = slides.length > 1 ? 'block' : 'none';
+                            } else {
+                                testimonialCarouselContainer.innerHTML = '<p>Belum ada testimoni untuk joki ini.</p>';
+                                prevButton.style.display = 'none';
+                                nextButton.style.display = 'none';
+                            }
                         }
                     });
                 });
@@ -610,23 +781,18 @@
                     const hasilCari = dataJoki.filter(joki => {
                         const cocokLayanan = !layanan || joki.layanan.includes(layanan);
                         const cocokPengalaman = !pengalaman || joki.pengalaman.toLowerCase() === pengalaman.toLowerCase();
-
                         return cocokLayanan && cocokPengalaman;
                     });
-
                     tampilkanHasil(hasilCari);
                 });
             }
 
-            // Tampilkan semua joki saat halaman pertama kali dimuat
             tampilkanHasil(dataJoki);
 
-            // Tutup modal ketika tombol close diklik
             closeModalButton.addEventListener('click', function() {
                 modal.style.display = "none";
             });
 
-            // Tutup modal jika area di luar modal diklik
             window.addEventListener('click', function(event) {
                 if (event.target == modal) {
                     modal.style.display = "none";
