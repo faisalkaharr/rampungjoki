@@ -27,6 +27,14 @@
             --dark-text: #343a40; /* Teks gelap */
             --light-text: #ffffff; /* Teks terang */
             --border-color: #dee2e6; /* Warna border */
+
+            /* Warna Kategori Baru */
+            --game-bg: #e0f7fa; /* Biru muda lembut */
+            --game-text: #00838f; /* Biru kehijauan gelap */
+            --tugas-bg: #fff3e0; /* Krem lembut */
+            --tugas-text: #e65100; /* Oranye gelap */
+            --penulisan-bg: #f0f4c3; /* Kuning kehijauan lembut */
+            --penulisan-text: #827717; /* Hijau tua */
         }
 
         body {
@@ -195,6 +203,45 @@
             align-items: center;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
             transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        .joki-card.game {
+            background-color: var(--game-bg);
+            border-color: var(--game-text);
+        }
+
+        .joki-card.game h3 {
+            color: var(--game-text);
+        }
+
+        .joki-card.game .joki-info p b {
+            color: var(--game-text);
+        }
+
+        .joki-card.tugas {
+            background-color: var(--tugas-bg);
+            border-color: var(--tugas-text);
+        }
+
+        .joki-card.tugas h3 {
+            color: var(--tugas-text);
+        }
+
+        .joki-card.tugas .joki-info p b {
+            color: var(--tugas-text);
+        }
+
+        .joki-card.penulisan {
+            background-color: var(--penulisan-bg);
+            border-color: var(--penulisan-text);
+        }
+
+        .joki-card.penulisan h3 {
+            color: var(--penulisan-text);
+        }
+
+        .joki-card.penulisan .joki-info p b {
+            color: var(--penulisan-text);
         }
 
         .joki-card:hover {
@@ -457,7 +504,7 @@
         }
 
         /* Responsive Layout */
-        @media (max-media (max-width: 768px) {
+        @media (max-width: 768px) {
             .navbar-container {
                 flex-direction: column;
                 align-items: flex-start;
@@ -809,7 +856,8 @@
                 profil: "#",
                 rating: 5,
                 testimonials: ["testimoni_proofread_1.png"]
-            },{
+            },
+            {
                 id: 16,
                 nama: "JokiValorant",
                 layanan: ["Game"],
@@ -1126,7 +1174,7 @@
                 pengalaman: "Menengah",
                 avatar: null,
                 wa: "6285211223344",
-                detail_layanan: "📊 Butuh laporan keuangan atau bisnis yang akurat dan profesional? Saya siap membantu.",
+                detail_layanan: "📊 Butuh laporan keuanganatau bisnis yang akurat dan profesional? Saya siap membantu.",
                 profil: "#",
                 rating: 4,
                 testimonials: ["testimoni_laporan_keuangan_1.png"]
@@ -1170,6 +1218,8 @@
             const modalLayananIsi = document.getElementById("modal-layanan-isi");
             const modalPesanSekarang = document.getElementById("modal-pesan-sekarang");
 
+            console.log("jokiListContainer:", jokiListContainer); // Cek apakah elemen ditemukan
+
             function renderRating(rating) {
                 let stars = '';
                 for (let i = 0; i < rating; i++) {
@@ -1184,6 +1234,7 @@
                     return;
                 }
                 jokiListContainer.innerHTML = '<h2>Hasil Pencarian Joki</h2>';
+                console.log("Jumlah joki yang akan ditampilkan:", joki.length); // Cek jumlah joki yang diterima fungsi
                 if (joki.length === 0) {
                     jokiListContainer.innerHTML += '<p class="no-results">Tidak ada joki yang ditemukan sesuai kriteria Anda.</p>';
                     return;
@@ -1192,6 +1243,14 @@
                 joki.forEach(j => {
                     const card = document.createElement('article');
                     card.classList.add('joki-card');
+                    if (j.layanan.includes('Game')) {
+                        card.classList.add('game');
+                    } else if (j.layanan.includes('Tugas')) {
+                        card.classList.add('tugas');
+                    } else if (j.layanan.includes('Penulisan')) {
+                        card.classList.add('penulisan');
+                    }
+
                     const avatarContent = j.avatar ? `<img src="${j.avatar}" alt="Avatar ${j.nama}" class="joki-avatar">` : `<div class="joki-avatar">${j.nama.charAt(0).toUpperCase()}</div>`;
                     card.innerHTML = `
                         ${avatarContent}
@@ -1226,11 +1285,10 @@
                             modalPesanSekarang.href = `https://wa.me/${selectedJoki.wa}`;
                             modal.style.display = "block";
 
-                            // Render Testimoni Carousel
                             const testimonialCarouselContainer = modal.querySelector('.testimonial-carousel');
                             const prevButton = modal.querySelector('.carousel-button.prev');
                             const nextButton = modal.querySelector('.carousel-button.next');
-                            testimonialCarouselContainer.innerHTML = ''; // Bersihkan carousel sebelumnya
+                            testimonialCarouselContainer.innerHTML = '';
 
                             if (selectedJoki.testimonials && selectedJoki.testimonials.length > 0) {
                                 selectedJoki.testimonials.forEach(imgSrc => {
@@ -1265,7 +1323,6 @@
                                     scrollToSlide(counter);
                                 });
 
-                                // Atur posisi awal
                                 scrollToSlide(0);
                                 prevButton.style.display = slides.length > 1 ? 'block' : 'none';
                                 nextButton.style.display = slides.length > 1 ? 'block' : 'none';
@@ -1289,10 +1346,12 @@
                         const cocokPengalaman = !pengalaman || joki.pengalaman.toLowerCase() === pengalaman.toLowerCase();
                         return cocokLayanan && cocokPengalaman;
                     });
+                    console.log("Hasil pencarian setelah filter:", hasilCari); // Cek hasil filter
                     tampilkanHasil(hasilCari);
                 });
             }
 
+            console.log("Data joki sebelum ditampilkan awal:", dataJoki); // Cek data sebelum ditampilkan
             tampilkanHasil(dataJoki);
 
             closeModalButton.addEventListener('click', function() {
