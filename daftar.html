@@ -16,7 +16,7 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', sans-serif;
             line-height: 1.6;
             background-color: #f4f4f4;
             color: #333;
@@ -34,6 +34,7 @@
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding-top: 70px; /* Ruang untuk navbar sticky */
         }
 
         h1 {
@@ -94,14 +95,16 @@
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
 
-        /* Navbar */
+        /* Navbar (Sama persis dengan tentang.html) */
         .navbar {
-            background-color: #375a7f; /* Darker blue professional */
-            color: #000000; /* Warna font hitam */
+            background-color: #375a7f; /* Biru tua profesional */
+            color: white;
             padding: 15px 0;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            position: sticky;
+            position: fixed; /* Tetap di atas saat di-scroll */
             top: 0;
+            left: 0;
+            width: 100%;
             z-index: 100;
         }
 
@@ -118,20 +121,12 @@
             font-size: 1.7rem;
             font-weight: bold;
             text-decoration: none;
-            color: #000000; /* Warna brand (logo dan teks) hitam */
+            color: white;
             transition: opacity 0.3s ease;
-            display: flex; /* Align logo and text */
-            align-items: center; /* Vertically align logo and text */
         }
 
         .navbar-brand:hover {
             opacity: 0.8;
-        }
-
-        .navbar-brand img {
-            height: 50px; /* Ukuran logo yang diperbesar */
-            vertical-align: middle;
-            margin-right: 10px;
         }
 
         .navbar-nav {
@@ -146,31 +141,28 @@
 
         .nav-link {
             text-decoration: none;
-            color: #000000; /* Warna link navbar hitam */
+            color: white;
             padding: 10px 15px;
             border-radius: 5px;
             transition: background-color 0.3s ease, color 0.3s ease;
-            background-color: transparent; /* Menghilangkan background default */
         }
 
-        .nav-link:hover,
-        .nav-link:focus {
-            background-color: rgba(0, 0, 0, 0.1); /* Efek hover abu-abu sedikit gelap */
-            color: #000000; /* Warna font tetap hitam */
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #e0f7fa;
         }
 
         .nav-link.active {
             font-weight: bold;
-            color: #375a7f; /* Warna link aktif menjadi biru */
         }
 
         .navbar-toggler {
             background: transparent;
             border: none;
-            color: #000000; /* Warna ikon toggler hitam */
+            color: white;
             font-size: 1.5rem;
             cursor: pointer;
-            display: none;
+            display: none; /* Hidden by default on larger screens */
             transition: opacity 0.3s ease;
         }
 
@@ -196,21 +188,9 @@
                 margin-bottom: 10px;
             }
 
-            .nav-link {
-                text-align: left; /* Agar link responsive rata kiri */
-            }
-
             .navbar-toggler {
                 display: block;
                 margin-left: auto;
-            }
-
-            .navbar-nav.open { /* Class untuk menampilkan menu saat responsive */
-                display: flex;
-            }
-
-            .navbar-nav {
-                display: none; /* Sembunyikan menu default saat responsive */
             }
         }
 
@@ -224,15 +204,16 @@
             font-size: 0.9rem;
         }
     </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header>
         <nav class="navbar">
-            <div class="container navbar-container">
-                <a class="navbar-brand" href="index.html">
-                    <img src="logo.png" alt="Logo RampungJoki" style="height: 50px; vertical-align: middle; margin-right: 10px;">
-                    RampungJoki
-                </a>
+            <div class="navbar-container">
+                <a class="navbar-brand" href="index.html">RampungJoki</a>
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="index.html">Beranda</a></li>
                     <li class="nav-item"><a class="nav-link" href="carijoki.html">Cari Joki</a></li>
